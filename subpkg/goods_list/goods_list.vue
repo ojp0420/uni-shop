@@ -1,6 +1,6 @@
 <template>
 	<view>
-		my
+		列表详情页
 	</view>
 </template>
 

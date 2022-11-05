@@ -1,6 +1,6 @@
 <template>
 	<view>
-		my
+		商品详情页面
 	</view>
 </template>
 
@@ -8,15 +8,12 @@
 	export default {
 		data() {
 			return {
-
-			}
-		},
-		methods: {
-
+				
+			};
 		}
 	}
 </script>
 
-<style>
+<style lang="scss">
 
 </style>
