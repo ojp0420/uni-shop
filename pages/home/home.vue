@@ -1,39 +1,47 @@
 <template>
 	<view id="root">
-		<swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000" circular>
-			<swiper-item v-for="item in swiperData" :key="item.goods_id">
-				<navigator class="swiper-item" url="/subpkg/goods_detail/goods_detail">
-					<image :src="item.image_src" mode=""></image>
-				</navigator>
-			</swiper-item>
-		</swiper>
-
-		<view class="catItem">
-			<view class="item" v-for="(item,index) in catItemsData" :key="index" @click="onNavClick(item)">
-				<image :src="item.image_src" mode="widthFix"></image>
-			</view>
+		<view class="search-box">
+			<mySearchVue @click="goSearchPage()" />
 		</view>
+		<view class="box">
 
-		<view class="floor-list">
-			<view class="floor-item" v-for="(item,index) in floorData" :key="index">
-				<view class="floor-title">
-					<image :src="item.floor_title.image_src" mode=""></image>
+			<swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000" circular>
+				<swiper-item v-for="item in swiperData" :key="item.goods_id">
+					<navigator class="swiper-item" :url='"/subpkg/goods_detail/goods_detail?goods_id=" +item.goods_id'>
+						<image :src="item.image_src" mode=""></image>
+					</navigator>
+				</swiper-item>
+			</swiper>
+
+			<view class="catItem">
+				<view class="item" v-for="(item,index) in catItemsData" :key="index" @click="onNavClick(item)">
+					<image :src="item.image_src" mode="widthFix"></image>
 				</view>
-				<view class="floor-img-box">
-					<view class="left-img-box" @click="onFloorClick(item.product_list[0])">
-						<image :src="item.product_list[0].image_src"
-							:style="{width: item.product_list[0].image_width + 'rpx'}" mode="widthFix"></image>
+			</view>
+
+			<view class="floor-list">
+				<view class="floor-item" v-for="(item,index) in floorData" :key="index">
+					<view class="floor-title">
+						<image :src="item.floor_title.image_src" mode=""></image>
 					</view>
-					<view class="right-img-box">
-						<view class="right-img-item" v-for="(item2, i2) in item.product_list" :key="i2" v-if="i2 !== 0"
-							@click="onFloorClick(item2)">
-							<image :src="item2.image_src" mode="widthFix" :style="{width: item2.image_width + 'rpx'}">
-							</image>
+					<view class="floor-img-box">
+						<view class="left-img-box" @click="onFloorClick(item.product_list[0])">
+							<image :src="item.product_list[0].image_src"
+								:style="{width: item.product_list[0].image_width + 'rpx'}" mode="widthFix"></image>
+						</view>
+						<view class="right-img-box">
+							<view class="right-img-item" v-for="(item2, i2) in item.product_list" :key="i2"
+								v-if="i2 !== 0" @click="onFloorClick(item2)">
+								<image :src="item2.image_src" mode="widthFix"
+									:style="{width: item2.image_width + 'rpx'}">
+								</image>
+							</view>
 						</view>
 					</view>
 				</view>
 			</view>
 		</view>
+	</view>
 	</view>
 </template>
 
@@ -43,7 +51,7 @@
 		reqCatitems,
 		reqFloorData
 	} from "@/api/app.js"
-
+	import mySearchVue from "@/components/my-search/my-search.vue"
 	export default {
 		data() {
 			return {
@@ -51,6 +59,9 @@
 				catItemsData: [],
 				floorData: [],
 			}
+		},
+		components: {
+			mySearchVue
 		},
 		onLoad() {
 			this.getSwiperdata() // 获取轮播图数据
@@ -83,6 +94,11 @@
 				uni.navigateTo({
 					url: item.url
 				})
+			},
+			goSearchPage() {
+				uni.navigateTo({
+					url: "/subpkg/search/search"
+				})
 			}
 		}
 	}
@@ -90,11 +106,20 @@
 
 <style lang="scss" scoped>
 	#root {
-		overflow-x: hidden;
+		.box {
+			overflow-x: hidden;
+		}
+
 
 		image {
 			width: 100%;
 			height: 100%;
+		}
+
+		.search-box {
+			position: sticky;
+			top: 0;
+			z-index: 999;
 		}
 
 		swiper {

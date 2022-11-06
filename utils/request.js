@@ -7,17 +7,12 @@ import {
 export default ({
 	url,
 	method,
-	params
+	data
 }) => {
-	// const token = uni.getStorageSync('token');
+
 	uni.showLoading({
 		title: "加载中"
 	});
-	// if (!token) {
-	// 	// 执行没有登录的逻辑
-
-	// 	return;
-	// }
 	return new Promise((resolve, reject) => {
 		uni.request({
 			url: BASE_URL + url,
@@ -25,7 +20,7 @@ export default ({
 			// header: {
 			// 	token: token
 			// },
-			data: params || {},
+			data: data || {},
 			success(res) {
 				if (res.statusCode === 200) {
 					resolve(res.data);

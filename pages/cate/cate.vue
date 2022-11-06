@@ -1,5 +1,8 @@
 <template>
 	<view id="root">
+		<view class="search-box">
+			<mySearchVue @click="goSearchPage()" />
+		</view>
 		<view class="scroll-view-container">
 			<scroll-view scroll-y="true">
 				<view class="left-scroll-view-item" :class="[index===active?'active':'']"
@@ -10,7 +13,8 @@
 				<view class="right-scroll-view-item" v-for="(item,index) in secondLevel" :key="index">
 					<view class="title">/ {{item.cat_name}} /</view>
 					<view class="container">
-						<view class="container-item" v-for="(item2,index2) in item.children" :key="index2" @click="gotoGoodsList(item2)">
+						<view class="container-item" v-for="(item2,index2) in item.children" :key="index2"
+							@click="gotoGoodsList(item2)">
 							<image :src="item2.cat_icon" mode=""></image>
 							<text>{{item2.cat_name}}</text>
 						</view>
@@ -25,6 +29,7 @@
 	import {
 		reqCateGories
 	} from "@/api/app.js"
+	import mySearchVue from "@/components/my-search/my-search.vue"
 	export default {
 		data() {
 			return {
@@ -33,6 +38,9 @@
 				cateGories: [],
 				secondLevel: [], // 二级分类
 			}
+		},
+		components: {
+			mySearchVue
 		},
 		onLoad() {
 			this.getCateGories() // 获取分类数据
@@ -55,18 +63,31 @@
 				uni.navigateTo({
 					url: '/subpkg/goods_list/goods_list?cid=' + item.cat_id
 				})
+			},
+			goSearchPage() {
+				uni.navigateTo({
+					url: "/subpkg/search/search"
+				})
 			}
+
 		}
 	}
 </script>
 
 <style lang="scss" scoped>
 	#root {
+
+		.search-box {
+			position: sticky;
+			top: 0;
+			z-index: 999;
+		}
+
 		.scroll-view-container {
 			display: flex;
 
 			scroll-view {
-				height: 100vh;
+				height: calc(100vh - 100rpx);
 
 				&:nth-child(1) {
 					width: 120px;
@@ -116,13 +137,15 @@
 						display: flex;
 						flex-direction: column;
 						align-items: center;
+						justify-content: center;
 						font-size: 12px;
 						font-weight: 700;
-						margin-bottom: 10px;
+						padding-bottom: 10px;
 
 						image {
 							width: 120rpx;
 							height: 120rpx;
+							margin-bottom: 5px;
 						}
 					}
 				}

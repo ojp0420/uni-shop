@@ -14,5 +14,10 @@ export const reqFloorData = () => request({
 })
 
 export const reqCateGories = () => request({
-	url:"/categories"
+	url: "/categories"
+})
+
+export const reqQsearch = (data) => request({
+	url: "/goods/qsearch",
+	data
 })
