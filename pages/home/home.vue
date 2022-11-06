@@ -89,65 +89,68 @@
 </script>
 
 <style lang="scss" scoped>
-	image {
-		width: 100%;
-		height: 100%;
-	}
+	#root {
+		overflow-x: hidden;
 
-	swiper {
-		height: 330rpx;
-		width: 100vw;
-
-		.swiper-item {
+		image {
 			width: 100%;
 			height: 100%;
-
-
 		}
-	}
 
-	.catItem {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		padding: 30rpx 0;
+		swiper {
+			height: 330rpx;
+			width: 100vw;
 
-		.item {
-			width: 25%;
-			height: 200rpx;
-			text-align: center;
-
-			image {
-				width: 65%;
-				height: 65%;
+			.swiper-item {
+				width: 100%;
+				height: 100%;
 			}
 		}
-	}
 
-	.floor-list {
-
-		.floor-item {
-			margin: 18rpx 0;
-		}
-
-		.floor-title {
-			height: 60rpx;
-			width: 100%;
-		}
-
-		.floor-img-box {
+		.catItem {
 			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 30rpx 0;
 
-			.left-img-box {
-				margin: 0 15rpx;
+			.item {
+				width: 25%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+
+				image {
+					width: 65%;
+					height: 65%;
+				}
+			}
+		}
+
+		.floor-list {
+
+			.floor-item {
+				margin: 18rpx 0;
 			}
 
-			.right-img-box {
-				display: flex;
-				flex-wrap: wrap;
+			.floor-title {
+				height: 60rpx;
+				width: 100%;
+			}
 
-				.right-img-item {
-					width: 50%;
+			.floor-img-box {
+				display: flex;
+
+				.left-img-box {
+					margin: 0 15rpx;
+				}
+
+				.right-img-box {
+					display: flex;
+					flex-wrap: wrap;
+
+					.right-img-item {
+						width: 50%;
+					}
 				}
 			}
 		}

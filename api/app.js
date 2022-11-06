@@ -12,3 +12,7 @@ export const reqCatitems = () => request({
 export const reqFloorData = () => request({
 	url: "/home/floordata"
 })
+
+export const reqCateGories = () => request({
+	url:"/categories"
+})
