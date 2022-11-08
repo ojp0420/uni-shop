@@ -21,3 +21,9 @@ export const reqQsearch = (data) => request({
 	url: "/goods/qsearch",
 	data
 })
+
+
+export const reqGoodsList = (data) => request({
+	url: "/goods/search",
+	data
+})
