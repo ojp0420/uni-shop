@@ -27,3 +27,8 @@ export const reqGoodsList = (data) => request({
 	url: "/goods/search",
 	data
 })
+
+export const reqGoodsDetail = (data) => request({
+	url: "/goods/detail",
+	data
+})
