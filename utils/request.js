@@ -31,6 +31,10 @@ export default ({
 			},
 			fail(err) {
 				reject(err);
+				uni.showModal({
+					content: err.errMsg,
+					showCancel: false
+				})
 			},
 			complete() {
 				uni.hideLoading();

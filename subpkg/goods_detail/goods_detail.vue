@@ -39,6 +39,10 @@
 	import {
 		reqGoodsDetail
 	} from "@/api/app.js"
+	import {
+		mapGetters
+	} from 'vuex'
+
 	export default {
 		data() {
 			return {
@@ -46,13 +50,12 @@
 				options: [{
 					icon: 'shop',
 					text: '店铺',
-					// info: 2,
 					infoBackgroundColor: '#007aff',
 					infoColor: "red"
 				}, {
 					icon: 'cart',
 					text: '购物车',
-					info: 3
+					info: 0
 				}],
 				buttonGroup: [{
 						text: '加入购物车',
@@ -66,6 +69,18 @@
 					}
 				]
 			};
+		},
+		watch: {
+			count: {
+				handler(newVal) {
+					this.options[1].info = newVal
+				},
+				immediate: true,
+				deep: true
+			}
+		},
+		computed: {
+			...mapGetters(['count'])
 		},
 		onLoad(options) {
 			this.getGoodsDetail(options)
@@ -98,7 +113,24 @@
 			onRightBtn({
 				index
 			}) {
-				console.log('onRightBtn', index);
+				if (index === 0) {
+					// 2. 组织一个商品的信息对象
+					const goods = {
+						goods_id: this.goods_info.goods_id, // 商品的Id
+						goods_name: this.goods_info.goods_name, // 商品的名称
+						goods_price: this.goods_info.goods_price, // 商品的价格
+						goods_count: 1, // 商品的数量
+						goods_small_logo: this.goods_info.goods_small_logo, // 商品的图片
+						goods_state: true // 商品的勾选状态
+					}
+					this.$store.commit('cart/addToCart', goods)
+					uni.showToast({
+						title: '加入购物车成功',
+						duration: 2000
+					})
+				} else {
+
+				}
 			}
 		}
 	}

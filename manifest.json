@@ -62,7 +62,10 @@
 		"permission": {},
 		"unipush": {
 			"enable": false
-		}
+		},
+		"requiredPrivateInfos": [
+			"chooseAddress"
+		]
 	},
 	"mp-alipay": {
 		"usingComponents": true
