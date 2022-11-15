@@ -6,6 +6,12 @@ export default {
 	computed: {
 		...mapGetters(['count'])
 	},
+	onShow() {
+		uni.setTabBarBadge({
+			index: 2,
+			text: this.count + ''
+		})
+	},
 	watch: {
 		count: {
 			handler(newVal) {
@@ -15,7 +21,8 @@ export default {
 					text: newVal + ''
 				})
 			},
-			immediate: true
+			immediate: true,
+			deep: true
 		}
 	}
 }

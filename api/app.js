@@ -32,3 +32,8 @@ export const reqGoodsDetail = (data) => request({
 	url: "/goods/detail",
 	data
 })
+
+export const userLogin = (data) => request({
+	url: "/users/wxlogin",
+	data
+})

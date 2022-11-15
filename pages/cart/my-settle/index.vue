@@ -11,7 +11,7 @@
 		</view>
 
 		<!-- 结算按钮 -->
-		<view class="btn-settle">结算(0)</view>
+		<view class="btn-settle" @click="settlement()">结算(0)</view>
 	</view>
 </template>
 
@@ -31,6 +31,9 @@
 			...mapMutations('cart', ['changeAllSelecState']),
 			onAllSelecState() {
 				this.changeAllSelecState(!this.isAllSelect)
+			},
+			settlement(){
+				this.$emit('settlement')
 			}
 		}
 	}

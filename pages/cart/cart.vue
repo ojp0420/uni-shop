@@ -10,14 +10,14 @@
 			</view>
 			<uni-swipe-action>
 				<block v-for="item in cartData" :key="item.goods_id">
-					<uni-swipe-action-item :auto-close="autoClose" :threshold="0" :right-options="options"
+					<uni-swipe-action-item :auto-close="false" :threshold="0" :right-options="options"
 						@click="bindClick($event,item)">
 						<myGoodsItem :item="item" @radioChange="radioChange" @valueChange="valueChange"
 							@goGoodsDetail="goGoodsDetail" />
 					</uni-swipe-action-item>
 				</block>
 			</uni-swipe-action>
-			<mySettle></mySettle>
+			<mySettle @settlement="settlement"></mySettle>
 		</block>
 		<block v-else>
 			<!-- 空白购物车区域 -->
@@ -57,7 +57,7 @@
 			}
 		},
 		computed: {
-			...mapGetters(['cartData'])
+			...mapGetters(['cartData', 'selectCartDate', 'userAddress', 'token'])
 		},
 		methods: {
 			...mapMutations('cart', ['changeGoodsSelect', 'changeGoodsNum', 'removeCartData']),
@@ -77,6 +77,21 @@
 			},
 			bindClick(event, data) {
 				this.removeCartData(data)
+			},
+			settlement() {
+				if (this.selectCartDate.length === 0) return uni.showToast({
+					title: "选择要结算的商品",
+					icon: "none"
+				})
+				if (JSON.stringify(this.userAddress) === "{}") return uni.showToast({
+					title: "选择收货地址",
+					icon: "none"
+				})
+				if (!this.token) return uni.showToast({
+					title: '请先登录',
+					icon: "none"
+				})
+				console.log("开始结算.....");
 			}
 		}
 	}

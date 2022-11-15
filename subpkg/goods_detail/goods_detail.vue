@@ -103,7 +103,6 @@
 			onLeftBtn({
 				index
 			}) {
-				console.log('onLeftBtn', index);
 				if (index === 1) {
 					uni.switchTab({
 						url: "/pages/cart/cart"

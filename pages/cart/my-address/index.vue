@@ -53,6 +53,14 @@
 		methods: {
 			...mapMutations('user', ['updateAddress']),
 			async chooseAddress() {
+				const [locationErr, locationSucc] = await uni.authorize({
+					scope: 'scope.address'
+				})
+				console.log(locationSucc);
+				if (locationSucc.errMsg !== "authorize:ok") return
+
+				const a = await uni.getSetting()
+				console.log(a);
 				const [err, succ] = await uni.chooseAddress()
 				// 2. 用户成功的选择了收货地址
 				if (err === null && succ.errMsg === 'chooseAddress:ok') {
@@ -110,7 +118,6 @@
 </script>
 
 <style lang="scss" scoped>
-
 	// 底部边框线的样式
 	.address-border {
 		display: block;
